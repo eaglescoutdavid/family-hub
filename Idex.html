@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="WordCraft">
+<title></title>
+<style>
+body{font-family:Aptos,Calibri,'Segoe UI',Arial,sans-serif;font-size:12pt;line-height:1.15;max-width:48em;margin:2em auto;padding:0 1em}
+table{border-collapse:collapse;margin:0.5em 0}
+blockquote{margin:0.5em 2em;font-style:italic;color:#404040}
+pre{background:#f5f5f5;padding:0.5em;font-family:'Courier New',monospace;font-size:10pt}
+</style>
+</head>
+<body>
+<p>&lt;!DOCTYPE html&gt;</p>
+<p>&lt;html lang=&quot;en&quot;&gt;</p>
+<p>&lt;head&gt;</p>
+<p>&lt;meta charset=&quot;UTF-8&quot;&gt;</p>
+<p>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;&gt;</p>
+<p>&lt;title&gt;Family Hub&lt;/title&gt;</p>
+<p>&lt;style&gt;</p>
+<p> &nbsp;:root {</p>
+<p> &nbsp;&nbsp;&nbsp;--david: #F4A261;</p>
+<p> &nbsp;&nbsp;&nbsp;--hannah: #7EB6D9;</p>
+<p> &nbsp;&nbsp;&nbsp;--bg: #F8F6F2;</p>
+<p> &nbsp;&nbsp;&nbsp;--card: #FFFFFF;</p>
+<p> &nbsp;&nbsp;&nbsp;--text: #333333;</p>
+<p> &nbsp;&nbsp;&nbsp;--muted: #777777;</p>
+<p> &nbsp;&nbsp;&nbsp;--accent: #E9C46A;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;* { box-sizing: border-box; margin: 0; padding: 0; }</p>
+<p> &nbsp;body {</p>
+<p> &nbsp;&nbsp;&nbsp;font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif;</p>
+<p> &nbsp;&nbsp;&nbsp;background: var(--bg);</p>
+<p> &nbsp;&nbsp;&nbsp;color: var(--text);</p>
+<p> &nbsp;&nbsp;&nbsp;height: 100vh;</p>
+<p> &nbsp;&nbsp;&nbsp;overflow: hidden;</p>
+<p> &nbsp;&nbsp;&nbsp;display: flex;</p>
+<p> &nbsp;&nbsp;&nbsp;flex-direction: column;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;header {</p>
+<p> &nbsp;&nbsp;&nbsp;background: white;</p>
+<p> &nbsp;&nbsp;&nbsp;padding: 12px 20px;</p>
+<p> &nbsp;&nbsp;&nbsp;display: flex;</p>
+<p> &nbsp;&nbsp;&nbsp;justify-content: space-between;</p>
+<p> &nbsp;&nbsp;&nbsp;align-items: center;</p>
+<p> &nbsp;&nbsp;&nbsp;border-bottom: 1px solid #eee;</p>
+<p> &nbsp;&nbsp;&nbsp;box-shadow: 0 1px 4px rgba(0,0,0,0.05);</p>
+<p> &nbsp;}</p>
+<p> &nbsp;.logo { font-size: 1.4rem; font-weight: 700; color: #444; }</p>
+<p> &nbsp;.people { display: flex; gap: 12px; }</p>
+<p> &nbsp;.person {</p>
+<p> &nbsp;&nbsp;&nbsp;display: flex; align-items: center; gap: 6px;</p>
+<p> &nbsp;&nbsp;&nbsp;font-size: 0.95rem; font-weight: 600;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;.dot { width: 12px; height: 12px; border-radius: 50%; }</p>
+<p> &nbsp;.david-dot { background: var(--david); }</p>
+<p> &nbsp;.hannah-dot { background: var(--hannah); }</p>
+<p>&nbsp;</p>
+<p> &nbsp;nav {</p>
+<p> &nbsp;&nbsp;&nbsp;display: flex;</p>
+<p> &nbsp;&nbsp;&nbsp;background: white;</p>
+<p> &nbsp;&nbsp;&nbsp;border-bottom: 1px solid #eee;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;nav button {</p>
+<p> &nbsp;&nbsp;&nbsp;flex: 1;</p>
+<p> &nbsp;&nbsp;&nbsp;padding: 14px 0;</p>
+<p> &nbsp;&nbsp;&nbsp;border: none;</p>
+<p> &nbsp;&nbsp;&nbsp;background: none;</p>
+<p> &nbsp;&nbsp;&nbsp;font-size: 1rem;</p>
+<p> &nbsp;&nbsp;&nbsp;font-weight: 600;</p>
+<p> &nbsp;&nbsp;&nbsp;color: var(--muted);</p>
+<p> &nbsp;&nbsp;&nbsp;cursor: pointer;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;nav button.active {</p>
+<p> &nbsp;&nbsp;&nbsp;color: var(--text);</p>
+<p> &nbsp;&nbsp;&nbsp;border-bottom: 3px solid var(--accent);</p>
+<p> &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp;main {</p>
+<p> &nbsp;&nbsp;&nbsp;flex: 1;</p>
+<p> &nbsp;&nbsp;&nbsp;overflow-y: auto;</p>
+<p> &nbsp;&nbsp;&nbsp;padding: 16px;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;.tab { display: none; }</p>
+<p> &nbsp;.tab.active { display: block; }</p>
+<p>&nbsp;</p>
+<p> &nbsp;.grid {</p>
+<p> &nbsp;&nbsp;&nbsp;display: grid;</p>
+<p> &nbsp;&nbsp;&nbsp;grid-template-columns: 1.4fr 1fr;</p>
+<p> &nbsp;&nbsp;&nbsp;gap: 16px;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;@media (max-width: 800px) {</p>
+<p> &nbsp;&nbsp;&nbsp;.grid { grid-template-columns: 1fr; }</p>
+<p> &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp;.card {</p>
+<p> &nbsp;&nbsp;&nbsp;background: var(--card);</p>
+<p> &nbsp;&nbsp;&nbsp;border-radius: 16px;</p>
+<p> &nbsp;&nbsp;&nbsp;padding: 18px;</p>
+<p> &nbsp;&nbsp;&nbsp;box-shadow: 0 2px 8px rgba(0,0,0,0.04);</p>
+<p> &nbsp;&nbsp;&nbsp;margin-bottom: 16px;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;.card h2 {</p>
+<p> &nbsp;&nbsp;&nbsp;font-size: 1.1rem;</p>
+<p> &nbsp;&nbsp;&nbsp;margin-bottom: 12px;</p>
+<p> &nbsp;&nbsp;&nbsp;color: #444;</p>
+<p> &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp;/* Calendar placeholder */</p>
+<p> &nbsp;.calendar-placeholder {</p>
+<p> &nbsp;&nbsp;&nbsp;height: 220px;</p>
+<p> &nbsp;&nbsp;&nbsp;background: linear-gradient(135deg, #fdf6e9, #e8f4fc);</p>
+<p> &nbsp;&nbsp;&nbsp;border-radius: 12px;</p>
+<p> &nbsp;&nbsp;&nbsp;display: flex;</p>
+<p> &nbsp;&nbsp;&nbsp;align-items: center;</p>
+<p> &nbsp;&nbsp;&nbsp;justify-content: center;</p>
+<p> &nbsp;&nbsp;&nbsp;color: var(--muted);</p>
+<p> &nbsp;&nbsp;&nbsp;font-size: 0.95rem;</p>
+<p> &nbsp;&nbsp;&nbsp;text-align: center;</p>
+<p> &nbsp;&nbsp;&nbsp;padding: 20px;</p>
+<p> &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp;/* Weather */</p>
+<p> &nbsp;.weather {</p>
+<p> &nbsp;&nbsp;&nbsp;display: flex;</p>
+<p> &nbsp;&nbsp;&nbsp;align-items: center;</p>
+<p> &nbsp;&nbsp;&nbsp;gap: 16px;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;.temp { font-size: 2.4rem; font-weight: 700; }</p>
+<p> &nbsp;.weather-info { font-size: 0.95rem; color: var(--muted); }</p>
+<p>&nbsp;</p>
+<p> &nbsp;/* Lists */</p>
+<p> &nbsp;ul { list-style: none; }</p>
+<p> &nbsp;li {</p>
+<p> &nbsp;&nbsp;&nbsp;padding: 10px 0;</p>
+<p> &nbsp;&nbsp;&nbsp;border-bottom: 1px solid #f0f0f0;</p>
+<p> &nbsp;&nbsp;&nbsp;display: flex;</p>
+<p> &nbsp;&nbsp;&nbsp;align-items: center;</p>
+<p> &nbsp;&nbsp;&nbsp;gap: 10px;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;li:last-child { border-bottom: none; }</p>
+<p> &nbsp;.check {</p>
+<p> &nbsp;&nbsp;&nbsp;width: 20px; height: 20px;</p>
+<p> &nbsp;&nbsp;&nbsp;border: 2px solid #ccc;</p>
+<p> &nbsp;&nbsp;&nbsp;border-radius: 6px;</p>
+<p> &nbsp;&nbsp;&nbsp;cursor: pointer;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;.check.done { background: var(--accent); border-color: var(--accent); }</p>
+<p>&nbsp;</p>
+<p> &nbsp;/* Meals suggestions */</p>
+<p> &nbsp;.suggestions {</p>
+<p> &nbsp;&nbsp;&nbsp;display: flex;</p>
+<p> &nbsp;&nbsp;&nbsp;flex-wrap: wrap;</p>
+<p> &nbsp;&nbsp;&nbsp;gap: 8px;</p>
+<p> &nbsp;&nbsp;&nbsp;margin-top: 12px;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;.suggestion {</p>
+<p> &nbsp;&nbsp;&nbsp;background: #f0f7fc;</p>
+<p> &nbsp;&nbsp;&nbsp;border: 1px solid #d0e6f5;</p>
+<p> &nbsp;&nbsp;&nbsp;border-radius: 20px;</p>
+<p> &nbsp;&nbsp;&nbsp;padding: 6px 14px;</p>
+<p> &nbsp;&nbsp;&nbsp;font-size: 0.9rem;</p>
+<p> &nbsp;&nbsp;&nbsp;cursor: pointer;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;.suggestion:hover { background: #e1f0fa; }</p>
+<p>&nbsp;</p>
+<p> &nbsp;/* Ring button */</p>
+<p> &nbsp;.ring-btn {</p>
+<p> &nbsp;&nbsp;&nbsp;display: block;</p>
+<p> &nbsp;&nbsp;&nbsp;width: 100%;</p>
+<p> &nbsp;&nbsp;&nbsp;padding: 16px;</p>
+<p> &nbsp;&nbsp;&nbsp;background: linear-gradient(135deg, #5c6bc0, #3949ab);</p>
+<p> &nbsp;&nbsp;&nbsp;color: white;</p>
+<p> &nbsp;&nbsp;&nbsp;border: none;</p>
+<p> &nbsp;&nbsp;&nbsp;border-radius: 14px;</p>
+<p> &nbsp;&nbsp;&nbsp;font-size: 1.1rem;</p>
+<p> &nbsp;&nbsp;&nbsp;font-weight: 600;</p>
+<p> &nbsp;&nbsp;&nbsp;cursor: pointer;</p>
+<p> &nbsp;&nbsp;&nbsp;text-align: center;</p>
+<p> &nbsp;&nbsp;&nbsp;text-decoration: none;</p>
+<p> &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp;/* Verse &amp; Quote */</p>
+<p> &nbsp;.verse, .quote {</p>
+<p> &nbsp;&nbsp;&nbsp;font-style: italic;</p>
+<p> &nbsp;&nbsp;&nbsp;color: #555;</p>
+<p> &nbsp;&nbsp;&nbsp;line-height: 1.5;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;.verse-ref { font-weight: 600; margin-top: 6px; color: var(--hannah); }</p>
+<p>&nbsp;</p>
+<p> &nbsp;/* Simple form elements */</p>
+<p> &nbsp;input, select, button.add-btn {</p>
+<p> &nbsp;&nbsp;&nbsp;padding: 10px 14px;</p>
+<p> &nbsp;&nbsp;&nbsp;border-radius: 10px;</p>
+<p> &nbsp;&nbsp;&nbsp;border: 1px solid #ddd;</p>
+<p> &nbsp;&nbsp;&nbsp;font-size: 1rem;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;button.add-btn {</p>
+<p> &nbsp;&nbsp;&nbsp;background: var(--accent);</p>
+<p> &nbsp;&nbsp;&nbsp;border: none;</p>
+<p> &nbsp;&nbsp;&nbsp;font-weight: 600;</p>
+<p> &nbsp;&nbsp;&nbsp;cursor: pointer;</p>
+<p> &nbsp;}</p>
+<p>&lt;/style&gt;</p>
+<p>&lt;/head&gt;</p>
+<p>&lt;body&gt;</p>
+<p> &nbsp;&lt;header&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;div class=&quot;logo&quot;&gt;Family Hub&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;div class=&quot;people&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;person&quot;&gt;&lt;span class=&quot;dot david-dot&quot;&gt;&lt;/span&gt; David&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;person&quot;&gt;&lt;span class=&quot;dot hannah-dot&quot;&gt;&lt;/span&gt; Hannah&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&lt;/header&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&lt;nav&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;button class=&quot;active&quot; onclick=&quot;showTab('home')&quot;&gt;Home&lt;/button&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;button onclick=&quot;showTab('chores')&quot;&gt;Chores&lt;/button&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;button onclick=&quot;showTab('todo')&quot;&gt;To-Do&lt;/button&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;button onclick=&quot;showTab('meals')&quot;&gt;Meals&lt;/button&gt;</p>
+<p> &nbsp;&lt;/nav&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&lt;main&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;!-- HOME TAB --&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;div id=&quot;home&quot; class=&quot;tab active&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;grid&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;card&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;This Week&lt;/h2&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;calendar-placeholder&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calendar will appear here once you add your Google &amp; Outlook iCal links.&lt;br&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(We’ll set this up next)</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;card&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Today’s To-Do&lt;/h2&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul id=&quot;today-todo&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;div class=&quot;check&quot; onclick=&quot;this.classList.toggle('done')&quot;&gt;&lt;/div&gt; Example task – tap to check&lt;/li&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;card&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Weather – Faison, NC&lt;/h2&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;weather&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;temp&quot; id=&quot;temp&quot;&gt;--°&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;weather-info&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id=&quot;condition&quot;&gt;Loading...&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id=&quot;highlow&quot;&gt;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;card&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Today’s Meals&lt;/h2&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul id=&quot;today-meals&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Breakfast: —&lt;/li&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Lunch: —&lt;/li&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Dinner: —&lt;/li&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;card&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Verse of the Day&lt;/h2&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;verse&quot; id=&quot;verse&quot;&gt;Loading verse...&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;verse-ref&quot; id=&quot;verse-ref&quot;&gt;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;card&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Encouragement&lt;/h2&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;quote&quot; id=&quot;quote&quot;&gt;Loading quote...&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=&quot;ring-btn&quot; href=&quot;https://ring.com&quot; target=&quot;_blank&quot;&gt;View Ring Camera&lt;/a&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;!-- CHORES TAB --&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;div id=&quot;chores&quot; class=&quot;tab&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;card&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Weekly Chores&lt;/h2&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p style=&quot;color:var(--muted);margin-bottom:16px;&quot;&gt;Tap the circle to mark complete. You can expand this later.&lt;/p&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;div class=&quot;check&quot; onclick=&quot;this.classList.toggle('done')&quot;&gt;&lt;/div&gt; Take out trash &lt;span style=&quot;margin-left:auto;color:var(--david)&quot;&gt;David&lt;/span&gt;&lt;/li&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;div class=&quot;check&quot; onclick=&quot;this.classList.toggle('done')&quot;&gt;&lt;/div&gt; Laundry &lt;span style=&quot;margin-left:auto;color:var(--hannah)&quot;&gt;Hannah&lt;/span&gt;&lt;/li&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;div class=&quot;check&quot; onclick=&quot;this.classList.toggle('done')&quot;&gt;&lt;/div&gt; Vacuum living room&lt;/li&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;div class=&quot;check&quot; onclick=&quot;this.classList.toggle('done')&quot;&gt;&lt;/div&gt; Clean kitchen&lt;/li&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;!-- TO-DO TAB --&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;div id=&quot;todo&quot; class=&quot;tab&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;card&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;To-Do List&lt;/h2&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div style=&quot;display:flex;gap:10px;margin-bottom:16px;&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type=&quot;text&quot; id=&quot;new-todo&quot; placeholder=&quot;Add a new task...&quot; style=&quot;flex:1;&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button class=&quot;add-btn&quot; onclick=&quot;addTodo()&quot;&gt;Add&lt;/button&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul id=&quot;full-todo&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;div class=&quot;check&quot; onclick=&quot;this.classList.toggle('done')&quot;&gt;&lt;/div&gt; Example longer-term task&lt;/li&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;!-- MEALS TAB --&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;div id=&quot;meals&quot; class=&quot;tab&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;card&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Weekly Meal Planner&lt;/h2&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id=&quot;meal-plan&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;strong&gt;Mon:&lt;/strong&gt; &lt;span id=&quot;meal-mon&quot;&gt;—&lt;/span&gt;&lt;/p&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;strong&gt;Tue:&lt;/strong&gt; &lt;span id=&quot;meal-tue&quot;&gt;—&lt;/span&gt;&lt;/p&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;strong&gt;Wed:&lt;/strong&gt; &lt;span id=&quot;meal-wed&quot;&gt;—&lt;/span&gt;&lt;/p&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;strong&gt;Thu:&lt;/strong&gt; &lt;span id=&quot;meal-thu&quot;&gt;—&lt;/span&gt;&lt;/p&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;strong&gt;Fri:&lt;/strong&gt; &lt;span id=&quot;meal-fri&quot;&gt;—&lt;/span&gt;&lt;/p&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;strong&gt;Sat:&lt;/strong&gt; &lt;span id=&quot;meal-sat&quot;&gt;—&lt;/span&gt;&lt;/p&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;strong&gt;Sun:&lt;/strong&gt; &lt;span id=&quot;meal-sun&quot;&gt;—&lt;/span&gt;&lt;/p&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3 style=&quot;margin:20px 0 10px;&quot;&gt;Suggestions (tap to add)&lt;/h3&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;suggestions&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;suggestion&quot; onclick=&quot;addMeal('Spaghetti &amp; Salad')&quot;&gt;Spaghetti &amp; Salad&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;suggestion&quot; onclick=&quot;addMeal('Tacos')&quot;&gt;Tacos&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;suggestion&quot; onclick=&quot;addMeal('Grilled Chicken')&quot;&gt;Grilled Chicken&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;suggestion&quot; onclick=&quot;addMeal('Pizza Night')&quot;&gt;Pizza Night&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;suggestion&quot; onclick=&quot;addMeal('Stir Fry')&quot;&gt;Stir Fry&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;suggestion&quot; onclick=&quot;addMeal('Soup &amp; Bread')&quot;&gt;Soup &amp; Bread&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;suggestion&quot; onclick=&quot;addMeal('Burgers')&quot;&gt;Burgers&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;suggestion&quot; onclick=&quot;addMeal('Pasta Primavera')&quot;&gt;Pasta Primavera&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p>&nbsp;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div style=&quot;margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;select id=&quot;meal-day&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;mon&quot;&gt;Monday&lt;/option&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;tue&quot;&gt;Tuesday&lt;/option&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;wed&quot;&gt;Wednesday&lt;/option&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;thu&quot;&gt;Thursday&lt;/option&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;fri&quot;&gt;Friday&lt;/option&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;sat&quot;&gt;Saturday&lt;/option&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;sun&quot;&gt;Sunday&lt;/option&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/select&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type=&quot;text&quot; id=&quot;custom-meal&quot; placeholder=&quot;Or type a custom meal...&quot;&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button class=&quot;add-btn&quot; onclick=&quot;addCustomMeal()&quot;&gt;Add to Day&lt;/button&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+<p> &nbsp;&lt;/main&gt;</p>
+<p>&nbsp;</p>
+<p>&lt;script&gt;</p>
+<p> &nbsp;// Tab switching</p>
+<p> &nbsp;function showTab(id) {</p>
+<p> &nbsp;&nbsp;&nbsp;document.querySelectorAll('.tab').forEach(t =&gt; t.classList.remove('active'));</p>
+<p> &nbsp;&nbsp;&nbsp;document.querySelectorAll('nav button').forEach(b =&gt; b.classList.remove('active'));</p>
+<p> &nbsp;&nbsp;&nbsp;document.getElementById(id).classList.add('active');</p>
+<p> &nbsp;&nbsp;&nbsp;event.target.classList.add('active');</p>
+<p> &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp;// Simple To-Do</p>
+<p> &nbsp;function addTodo() {</p>
+<p> &nbsp;&nbsp;&nbsp;const input = document.getElementById('new-todo');</p>
+<p> &nbsp;&nbsp;&nbsp;const text = input.value.trim();</p>
+<p> &nbsp;&nbsp;&nbsp;if (!text) return;</p>
+<p> &nbsp;&nbsp;&nbsp;const li = document.createElement('li');</p>
+<p> &nbsp;&nbsp;&nbsp;li.innerHTML = `&lt;div class=&quot;check&quot; onclick=&quot;this.classList.toggle('done')&quot;&gt;&lt;/div&gt; ${text}`;</p>
+<p> &nbsp;&nbsp;&nbsp;document.getElementById('full-todo').appendChild(li);</p>
+<p> &nbsp;&nbsp;&nbsp;input.value = '';</p>
+<p> &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp;// Meals</p>
+<p> &nbsp;function addMeal(meal) {</p>
+<p> &nbsp;&nbsp;&nbsp;const day = document.getElementById('meal-day').value;</p>
+<p> &nbsp;&nbsp;&nbsp;document.getElementById('meal-' + day).textContent = meal;</p>
+<p> &nbsp;}</p>
+<p> &nbsp;function addCustomMeal() {</p>
+<p> &nbsp;&nbsp;&nbsp;const meal = document.getElementById('custom-meal').value.trim();</p>
+<p> &nbsp;&nbsp;&nbsp;if (!meal) return;</p>
+<p> &nbsp;&nbsp;&nbsp;addMeal(meal);</p>
+<p> &nbsp;&nbsp;&nbsp;document.getElementById('custom-meal').value = '';</p>
+<p> &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp;// Weather (Open-Meteo - free, no key needed)</p>
+<p> &nbsp;async function loadWeather() {</p>
+<p> &nbsp;&nbsp;&nbsp;try {</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Approximate coordinates for Faison, NC</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=35.12&amp;longitude=-78.14&amp;current_weather=true&amp;daily=temperature_2m_max,temperature_2m_min&amp;temperature_unit=fahrenheit&amp;timezone=auto');</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const data = await res.json();</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('temp').textContent = Math.round(data.current_weather.temperature) + '°';</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('condition').textContent = weatherCodeToText(data.current_weather.weathercode);</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('highlow').textContent = `H: ${Math.round(data.daily.temperature_2m_max[0])}° &nbsp;L: ${Math.round(data.daily.temperature_2m_min[0])}°`;</p>
+<p> &nbsp;&nbsp;&nbsp;} catch(e) {</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('condition').textContent = 'Weather unavailable';</p>
+<p> &nbsp;&nbsp;&nbsp;}</p>
+<p> &nbsp;}</p>
+<p> &nbsp;function weatherCodeToText(code) {</p>
+<p> &nbsp;&nbsp;&nbsp;const map = {0:'Clear',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Foggy',61:'Light rain',63:'Rain',80:'Showers',95:'Thunderstorm'};</p>
+<p> &nbsp;&nbsp;&nbsp;return map[code] || 'Cloudy';</p>
+<p> &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp;// Simple rotating quotes</p>
+<p> &nbsp;const quotes = [</p>
+<p> &nbsp;&nbsp;&nbsp;&quot;The best time to plant a tree was 20 years ago. The second best time is now.&quot;,</p>
+<p> &nbsp;&nbsp;&nbsp;&quot;You are never too old to set another goal or to dream a new dream. – C.S. Lewis&quot;,</p>
+<p> &nbsp;&nbsp;&nbsp;&quot;In the middle of every difficulty lies opportunity. – Albert Einstein&quot;,</p>
+<p> &nbsp;&nbsp;&nbsp;&quot;Be yourself; everyone else is already taken. – Oscar Wilde&quot;,</p>
+<p> &nbsp;&nbsp;&nbsp;&quot;The only way to do great work is to love what you do. – Steve Jobs&quot;,</p>
+<p> &nbsp;&nbsp;&nbsp;&quot;Kindness is a language that the deaf can hear and the blind can see.&quot;</p>
+<p> &nbsp;];</p>
+<p> &nbsp;document.getElementById('quote').textContent = quotes[Math.floor(Math.random()*quotes.length)];</p>
+<p>&nbsp;</p>
+<p> &nbsp;// Verse of the Day (simple static for reliability on old WebView – can be improved later)</p>
+<p> &nbsp;const verses = [</p>
+<p> &nbsp;&nbsp;&nbsp;{text: &quot;For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.&quot;, ref: &quot;Jeremiah 29:11&quot;},</p>
+<p> &nbsp;&nbsp;&nbsp;{text: &quot;I can do all things through Christ who strengthens me.&quot;, ref: &quot;Philippians 4:13&quot;},</p>
+<p> &nbsp;&nbsp;&nbsp;{text: &quot;The Lord is my shepherd, I lack nothing.&quot;, ref: &quot;Psalm 23:1&quot;},</p>
+<p> &nbsp;&nbsp;&nbsp;{text: &quot;Be strong and courageous. Do not be afraid... for the Lord your God goes with you.&quot;, ref: &quot;Deuteronomy 31:6&quot;},</p>
+<p> &nbsp;&nbsp;&nbsp;{text: &quot;Cast all your anxiety on him because he cares for you.&quot;, ref: &quot;1 Peter 5:7&quot;}</p>
+<p> &nbsp;];</p>
+<p> &nbsp;const v = verses[Math.floor(Math.random()*verses.length)];</p>
+<p> &nbsp;document.getElementById('verse').textContent = v.text;</p>
+<p> &nbsp;document.getElementById('verse-ref').textContent = v.ref;</p>
+<p>&nbsp;</p>
+<p> &nbsp;// Load weather on start</p>
+<p> &nbsp;loadWeather();</p>
+<p>&lt;/script&gt;</p>
+<p>&lt;/body&gt;</p>
+<p>&lt;/html&gt;</p>
+</body>
+</html>

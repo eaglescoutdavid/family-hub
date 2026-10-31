@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#f8f6f2">
+<title>Family Hub</title>
+<style>
+:root{--david:#f4a261;--hannah:#7eb6d9;--bg:#f8f6f2;--card:#fff;--ink:#343434;--muted:#777;--accent:#e9c46a;--line:#eee}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:16px}
+header{background:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line)}
+.logo{font-size:24px;font-weight:bold}.people{display:flex;gap:14px;flex-wrap:wrap}.person{font-weight:bold;white-space:nowrap}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px}.david{background:var(--david)}.hannah{background:var(--hannah)}
+nav{display:flex;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+nav button{flex:1;padding:15px 5px;border:0;background:#fff;color:var(--muted);font-size:16px;font-weight:bold}
+nav button.active{color:var(--ink);border-bottom:4px solid var(--accent)}
+main{padding:16px;max-width:1400px;margin:auto}.tab{display:none}.tab.active{display:block}
+.grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:16px}
+.card{background:var(--card);border-radius:15px;padding:18px;margin-bottom:16px;box-shadow:0 2px 8px #0000000a}
+h2{font-size:20px;margin:0 0 13px}h3{font-size:17px;margin:18px 0 10px}
+.muted{color:var(--muted)}.calendar{min-height:170px;border-radius:12px;background:linear-gradient(135deg,#fdf6e9,#e8f4fc);padding:20px;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:8px}
+.weather{display:flex;align-items:center;gap:16px}.temp{font-size:42px;font-weight:bold}.weather-info{color:var(--muted)}
+ul{list-style:none;padding:0;margin:0}li{padding:10px 0;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px}li:last-child{border-bottom:0}
+.check{width:22px;height:22px;flex:0 0 22px;border:2px solid #bbb;border-radius:6px;background:white}.check.done{background:var(--accent);border-color:var(--accent)}
+.done-text{text-decoration:line-through;color:#999}
+input,select,button.action{font:inherit;padding:10px 12px;border:1px solid #ddd;border-radius:9px;background:white;min-height:42px}
+button.action{background:var(--accent);border:0;font-weight:bold;cursor:pointer}
+button.small{padding:6px 9px;min-height:34px;font-size:14px}
+.formrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.formrow input{flex:1;min-width:150px}
+.item-main{flex:1;min-width:0}.tag{font-size:13px;padding:4px 8px;border-radius:20px;background:#f4f4f4;white-space:nowrap}.tag.david-tag{background:#fff0e3;color:#9a531b}.tag.hannah-tag{background:#eaf5fb;color:#326b8c}
+.suggestions{display:flex;flex-wrap:wrap;gap:8px}.suggestion{border:1px solid #d0e6f5;background:#f0f7fc;border-radius:22px;padding:8px 13px;cursor:pointer}
+.quote,.verse{font-style:italic;line-height:1.5;color:#555}.verse-ref{font-weight:bold;color:#4b87a8;margin-top:8px}
+.ring-btn{display:block;text-align:center;text-decoration:none;background:#4556a8;color:white;border-radius:13px;padding:16px;font-weight:bold}
+.meal-day{padding:10px 0;border-bottom:1px solid #eee}.meal-day:last-child{border:0}.meal-day strong{display:inline-block;min-width:95px}
+.delete{border:0;background:transparent;color:#a44;font-size:20px;padding:4px 8px}
+footer{text-align:center;color:#999;font-size:12px;padding:12px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}header{padding:12px}.logo{font-size:21px}main{padding:10px}nav button{font-size:14px;padding:13px 2px}}
+</style>
+</head>
+<body>
+<header><div class="logo">Family Hub</div><div class="people"><span class="person"><i class="dot david"></i>David</span><span class="person"><i class="dot hannah"></i>Hannah</span></div></header>
+<nav aria-label="Main navigation">
+<button class="active" data-tab="home">Home</button><button data-tab="chores">Chores</button><button data-tab="todo">To-Do</button><button data-tab="meals">Meals</button>
+</nav>
+<main>
+<section id="home" class="tab active">
+<div class="grid"><div>
+<div class="card"><h2>This Week</h2><div class="calendar"><strong>Family Calendar</strong><span>Google and Outlook calendars can be connected here when you're ready.</span><span class="muted">Calendar feeds have not been configured yet.</span></div></div>
+<div class="card"><h2>Today's To-Do</h2><ul id="today-todo"></ul><p id="today-todo-empty" class="muted">Nothing on today's list yet.</p></div>
+</div><div>
+<div class="card"><h2>Weather · Faison, NC</h2><div class="weather"><div class="temp" id="temp">--°</div><div class="weather-info"><div id="condition">Loading weather…</div><div id="highlow"></div></div></div></div>
+<div class="card"><h2>Today's Meals</h2><ul id="today-meals"></ul><p id="today-meals-empty" class="muted">No meals planned for today.</p></div>
+<div class="card"><h2>Verse of the Day</h2><div class="verse" id="verse">Open Bible.com for today's verse.</div><div class="verse-ref" id="verse-ref"></div><p style="margin-top:10px"><a href="https://www.bible.com/verse-of-the-day" target="_blank" rel="noopener">Read today's verse on Bible.com</a></p></div>
+<div class="card"><h2>A Little Encouragement</h2><div class="quote" id="quote"></div></div>
+<a class="ring-btn" href="https://ring.com" target="_blank" rel="noopener">View Ring Camera</a>
+</div></div>
+</section>
+<section id="chores" class="tab"><div class="card"><h2>Weekly Chores</h2><p class="muted">Add chores, assign them, and check them off as you go. Changes are saved on this device.</p>
+<div class="formrow"><input id="chore-name" placeholder="Chore"><select id="chore-person"><option value="David">David</option><option value="Hannah">Hannah</option><option value="Both">Both</option></select><select id="chore-day"><option>Every day</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select><button class="action" id="add-chore">Add chore</button></div><ul id="chore-list"></ul><p id="chore-empty" class="muted">No chores yet. Add your first one above.</p></div></section>
+<section id="todo" class="tab"><div class="card"><h2>Family To-Do List</h2><p class="muted">Add a task and optionally assign it to someone.</p><div class="formrow"><input id="todo-name" placeholder="What needs to get done?"><select id="todo-person"><option value="Both">Both</option><option value="David">David</option><option value="Hannah">Hannah</option></select><input id="todo-date" type="date"><button class="action" id="add-todo">Add task</button></div><ul id="todo-list"></ul><p id="todo-empty" class="muted">Your to-do list is empty.</p></div></section>
+<section id="meals" class="tab"><div class="card"><h2>Weekly Meal Planner</h2><p class="muted">Choose a day and meal type, then tap a suggestion or add your own idea.</p><div class="formrow"><select id="meal-day"><option value="0">Sunday</option><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option></select><select id="meal-type"><option>Breakfast</option><option>Lunch</option><option selected>Dinner</option></select><input id="meal-name" placeholder="Meal idea"><button class="action" id="add-meal">Add to menu</button></div><h3>Meal suggestions · tap to select</h3><div class="suggestions" id="suggestions"></div><h3>This week's menu</h3><div id="meal-plan"></div></div></section>
+</main><footer>Family Hub · David & Hannah</footer>
+<script>
+(function(){
+"use strict";
+var KEY="familyHubData_v1";
+var days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+var suggestions=["Spaghetti & Salad","Tacos","Grilled Chicken","Pizza Night","Stir Fry","Soup & Bread","Burgers","Pasta Primavera","Sheet Pan Chicken","Breakfast for Dinner","BBQ Chicken","Baked Potato Bar","Quesadillas","Chili"];
+var quotes=["A little progress each day adds up to big results.","Where love lives, ordinary days become meaningful.","Be strong and courageous. The Lord your God is with you wherever you go. — Joshua 1:9","Let all that you do be done in love. — 1 Corinthians 16:14","The best way to make a difference is to start with the people right in front of you.","Do not grow weary in doing good. — Galatians 6:9"];
+var data={chores:[],todos:[],meals:[]};
+function load(){try{var saved=localStorage.getItem(KEY);if(saved){var parsed=JSON.parse(saved);if(parsed&&typeof parsed==="object"){data.chores=parsed.chores||[];data.todos=parsed.todos||[];data.meals=parsed.meals||[];}}}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){alert("This browser could not save your changes. Check its site storage settings.");}}
+function el(id){return document.getElementById(id);}
+function make(tag,cls,txt){var n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n;}
+function today(){return new Date().getDay();}
+function dateKey(d){var x=new Date(d);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0");}
+function badge(person){if(person==="David")return "tag david-tag";if(person==="Hannah")return "tag hannah-tag";return "tag";}
+function renderTodos(){var list=el("todo-list"),todayList=el("today-todo");list.textContent="";todayList.textContent="";var count=0,homeCount=0;data.todos.forEach(function(t,i){var li=make("li"),check=make("button","check"+(t.done?" done":""),"");check.setAttribute("aria-label",t.done?"Mark incomplete":"Mark complete");check.addEventListener("click",function(){t.done=!t.done;save();render();});li.appendChild(check);var wrap=make("div","item-main");wrap.appendChild(make("span",t.done?"done-text":"",t.name));if(t.date)wrap.appendChild(make("div","muted",t.date));li.appendChild(wrap);li.appendChild(make("span",badge(t.person),t.person));var del=make("button","delete","×");del.addEventListener("click",function(){data.todos.splice(i,1);save();render();});li.appendChild(del);list.appendChild(li);count++;if(!t.done&&(!t.date||t.date===dateKey(new Date()))){var home=make("li");var hc=make("button","check","");hc.addEventListener("click",function(){t.done=true;save();render();});home.appendChild(hc);home.appendChild(make("span","item-main",t.name));todayList.appendChild(home);homeCount++;}});el("todo-empty").style.display=count?"none":"block";el("today-todo-empty").style.display=homeCount?"none":"block";}
+function renderChores(){var list=el("chore-list");list.textContent="";data.chores.forEach(function(c,i){var li=make("li"),check=make("button","check"+(c.done?" done":""),"");check.addEventListener("click",function(){c.done=!c.done;save();renderChores();});li.appendChild(check);li.appendChild(make("span","item-main"+(c.done?" done-text":""),c.name+" · "+c.day));li.appendChild(make("span",badge(c.person),c.person));var del=make("button","delete","×");del.addEventListener("click",function(){data.chores.splice(i,1);save();renderChores();});li.appendChild(del);list.appendChild(li);});el("chore-empty").style.display=data.chores.length?"none":"block";}
+function renderMeals(){var plan=el("meal-plan");plan.textContent="";days.forEach(function(day,d){var section=make("div","meal-day"),heading=make("strong","",day);section.appendChild(heading);var entries=data.meals.filter(function(m){return Number(m.day)===d;});if(!entries.length)section.appendChild(make("span","muted","—"));entries.forEach(function(m){var span=make("span","",m.type+": "+m.name+" ");section.appendChild(span);var del=make("button","delete","×");del.setAttribute("aria-label","Remove "+m.name);del.addEventListener("click",function(){data.meals=data.meals.filter(function(x){return x!==m;});save();render();});section.appendChild(del);});plan.appendChild(section);});var todays=data.meals.filter(function(m){return Number(m.day)===today();});var ul=el("today-meals");ul.textContent="";todays.forEach(function(m){var li=make("li","",m.type+": "+m.name);ul.appendChild(li);});el("today-meals-empty").style.display=todays.length?"none":"block";}
+function render(){renderTodos();renderChores();renderMeals();}
+document.querySelectorAll("nav button").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll("nav button").forEach(function(b){b.classList.remove("active");});document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active");});btn.classList.add("active");el(btn.getAttribute("data-tab")).classList.add("active");});});
+el("add-todo").addEventListener("click",function(){var name=el("todo-name").value.trim();if(!name)return;data.todos.push({name:name,person:el("todo-person").value,date:el("todo-date").value,done:false});el("todo-name").value="";save();render();});
+el("todo-name").addEventListener("keydown",function(e){if(e.key==="Enter")el("add-todo").click();});
+el("add-chore").addEventListener("click",function(){var name=el("chore-name").value.trim();if(!name)return;data.chores.push({name:name,person:el("chore-person").value,day:el("chore-day").value,done:false});el("chore-name").value="";save();renderChores();});
+el("chore-name").addEventListener("keydown",function(e){if(e.key==="Enter")el("add-chore").click();});
+el("add-meal").addEventListener("click",function(){var name=el("meal-name").value.trim();if(!name)return;data.meals.push({day:Number(el("meal-day").value),type:el("meal-type").value,name:name});el("meal-name").value="";save();renderMeals();});
+el("meal-name").addEventListener("keydown",function(e){if(e.key==="Enter")el("add-meal").click();});
+suggestions.forEach(function(s){var b=make("button","suggestion",s);b.addEventListener("click",function(){el("meal-name").value=s;});el("suggestions").appendChild(b);});
+var q=quotes[Math.floor((new Date().getFullYear()*366+Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/86400000))%quotes.length)];el("quote").textContent=q;
+var verseLines=[["The Lord is my shepherd; I shall not want.","Psalm 23:1"],["I can do all things through Christ who strengthens me.","Philippians 4:13"],["Let all that you do be done in love.","1 Corinthians 16:14"],["Be strong and courageous. Do not be afraid; do not be discouraged.","Joshua 1:9"],["Cast all your anxiety on him because he cares for you.","1 Peter 5:7"],["Trust in the Lord with all your heart.","Proverbs 3:5"]];var v=verseLines[Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/86400000)%verseLines.length];el("verse").textContent=v[0];el("verse-ref").textContent=v[1];
+function weatherText(c){var m={0:"Clear",1:"Mostly clear",2:"Partly cloudy",3:"Overcast",45:"Foggy",48:"Foggy",51:"Light drizzle",53:"Drizzle",55:"Heavy drizzle",61:"Light rain",63:"Rain",65:"Heavy rain",71:"Light snow",73:"Snow",75:"Heavy snow",80:"Rain showers",81:"Rain showers",82:"Heavy showers",95:"Thunderstorm",96:"Thunderstorm",99:"Thunderstorm"};return m[c]||"Current conditions";}
+function weather(){var url="https://api.open-meteo.com/v1/forecast?latitude=35.12&longitude=-78.14&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=America%2FNew_York";fetch(url).then(function(r){if(!r.ok)throw Error("weather");return r.json();}).then(function(d){el("temp").textContent=Math.round(d.current.temperature_2m)+"°";el("condition").textContent=weatherText(d.current.weather_code);el("highlow").textContent="High "+Math.round(d.daily.temperature_2m_max[0])+"° · Low "+Math.round(d.daily.temperature_2m_min[0])+"°";}).catch(function(){el("condition").textContent="Weather unavailable";});}
+load();render();weather();
+})();
+</script>
+</body>
+</html>
